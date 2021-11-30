@@ -5,6 +5,7 @@ const xml2js = require('xml2js');
 const shared = require('./shared');
 const settings = require('./settings');
 const translator = require('./translator');
+const titleCase = require('better-title-case');
 
 async function parseFilePromise(config) {
 	console.log('\nParsing...');
@@ -67,6 +68,7 @@ function collectPosts(data, postTypes, config) {
 				},
 				frontmatter: {
 					title: getPostTitle(post),
+					slug: getPostSlug(post),
 					date: getPostDate(post),
 					categories: getCategories(post),
 					tags: getTags(post)
@@ -106,8 +108,12 @@ function getPostCoverImageId(post) {
 }
 
 function getPostTitle(post) {
-	return post.title[0];
+	return titleCase(post.title[0]);
 }
+// function getFrontmatterSlug(post) {
+// 	const url = new URL(post.link[0]);
+// 	return decodeURIComponent(url.pathname.replace(/\//g, ''));
+// }
 
 function getPostDate(post) {
 	const dateTime = luxon.DateTime.fromRFC2822(post.pubDate[0], { zone: 'utc' });
