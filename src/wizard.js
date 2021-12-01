@@ -8,73 +8,73 @@ const package = require('../package.json');
 
 // all user options for command line and wizard are declared here
 const options = [
-	// wizard must always be first
-	{
-		name: 'wizard',
-		type: 'boolean',
-		description: 'Use wizard',
-		default: true
-	},
-	{
-		name: 'input',
-		type: 'file',
-		description: 'Path to WordPress export file',
-		default: 'export.xml'
-	},
-	{
-		name: 'output',
-		type: 'folder',
-		description: 'Path to output folder',
-		default: 'output'
-	},
-	{
-		name: 'year-folders',
-		aliases: ['yearfolders', 'yearmonthfolders'],
-		type: 'boolean',
-		description: 'Create year folders',
-		default: false
-	},
-	{
-		name: 'month-folders',
-		aliases: ['yearmonthfolders'],
-		type: 'boolean',
-		description: 'Create month folders',
-		default: false
-	},
-	{
-		name: 'post-folders',
-		aliases: ['postfolders'],
-		type: 'boolean',
-		description: 'Create a folder for each post',
-		default: true
-	},
-	{
-		name: 'prefix-date',
-		aliases: ['prefixdate'],
-		type: 'boolean',
-		description: 'Prefix post folders/files with date',
-		default: false
-	},
-	{
-		name: 'save-attached-images',
-		aliases: ['saveimages'],
-		type: 'boolean',
-		description: 'Save images attached to posts',
-		default: true
-	},
-	{
-		name: 'save-scraped-images',
-		aliases: ['addcontentimages'],
-		type: 'boolean',
-		description: 'Save images scraped from post body content',
-		default: true
-	},
-	{
-		name: 'include-other-types',
-		type: 'boolean',
-		description: 'Include custom post types and pages',
-		default: false
-	}
+  // wizard must always be first
+  {
+    name: "wizard",
+    type: "boolean",
+    description: "Use wizard",
+    default: true,
+  },
+  {
+    name: "input",
+    type: "file",
+    description: "Path to WordPress export file",
+    default: "test.xml",
+  },
+  {
+    name: "output",
+    type: "folder",
+    description: "Path to output folder",
+    default: "test",
+  },
+  {
+    name: "year-folders",
+    aliases: ["yearfolders", "yearmonthfolders"],
+    type: "boolean",
+    description: "Create year folders",
+    default: false,
+  },
+  {
+    name: "month-folders",
+    aliases: ["yearmonthfolders"],
+    type: "boolean",
+    description: "Create month folders",
+    default: false,
+  },
+  {
+    name: "post-folders",
+    aliases: ["postfolders"],
+    type: "boolean",
+    description: "Create a folder for each post",
+    default: true,
+  },
+  {
+    name: "prefix-date",
+    aliases: ["prefixdate"],
+    type: "boolean",
+    description: "Prefix post folders/files with date",
+    default: true,
+  },
+  {
+    name: "save-attached-images",
+    aliases: ["saveimages"],
+    type: "boolean",
+    description: "Save images attached to posts",
+    default: false,
+  },
+  {
+    name: "save-scraped-images",
+    aliases: ["addcontentimages"],
+    type: "boolean",
+    description: "Save images scraped from post body content",
+    default: false,
+  },
+  {
+    name: "include-other-types",
+    type: "boolean",
+    description: "Include custom post types and pages",
+    default: true,
+  },
 ];
 
 async function getConfig(argv) {

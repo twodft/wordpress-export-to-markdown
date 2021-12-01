@@ -2,6 +2,7 @@
 node_modules/
 output/
 tmp/
+test/
 
 #ignore specific filenames
 export.xml

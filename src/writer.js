@@ -157,38 +157,45 @@ async function loadImageFilePromise(imageUrl) {
 }
 
 function getPostPath(post, config) {
-	const dt = luxon.DateTime.fromISO(post.frontmatter.date);
+  const dt = luxon.DateTime.fromISO(post.frontmatter.date);
 
-	// start with base output dir
-	const pathSegments = [config.output];
+  // start with base output dir
+  const pathSegments = [config.output];
 
-	// create segment for post type if we're dealing with more than just "post"
-	if (config.includeOtherTypes) {
-		pathSegments.push(post.meta.type);
-	}
+  // create segment for post type if we're dealing with more than just "post"
+  if (config.includeOtherTypes) {
+    pathSegments.push(post.meta.type);
+  }
 
-	if (config.yearFolders) {
-		pathSegments.push(dt.toFormat('yyyy'));
-	}
+  if (config.yearFolders) {
+    pathSegments.push(dt.toFormat("yyyy"));
+  }
 
-	if (config.monthFolders) {
-		pathSegments.push(dt.toFormat('LL'));
-	}
+  if (config.monthFolders) {
+    pathSegments.push(dt.toFormat("LL"));
+  }
 
-	// create slug fragment, possibly date prefixed
-	let slugFragment = post.meta.slug;
-	if (config.prefixDate) {
-		slugFragment = dt.toFormat('yyyy-LL-dd') + '-' + slugFragment;
-	}
+  // create slug fragment, possibly date prefixed
+  // let slugFragment = post.meta.slug;
+  // if (config.prefixDate) {
+  // 	slugFragment = dt.toFormat("yyyy-LL-dd") + "_" + slugFragment;
+  // }
+  let slugFragment = post.meta.slug;
+  if (
+    (config.prefixDate && post.meta.type === "post") ||
+    post.meta.type === "new"
+  ) {
+    slugFragment = dt.toFormat("yyyy-LL-dd") + "_" + slugFragment;
+  }
 
-	// use slug fragment as folder or filename as specified
-	if (config.postFolders) {
-		pathSegments.push(slugFragment, 'index.md');
-	} else {
-		pathSegments.push(slugFragment + '.md');
-	}
+  // use slug fragment as folder or filename as specified
+  if (config.postFolders) {
+    pathSegments.push(slugFragment, "index.md");
+  } else {
+    pathSegments.push(slugFragment + ".md");
+  }
 
-	return path.join(...pathSegments);
+  return path.join(...pathSegments);
 }
 
 function checkFile(path) {
